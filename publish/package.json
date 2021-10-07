@@ -1,21 +1,13 @@
 {
-  "name": "npmtest-5066",
+  "name": "learn-express",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "start": "nodemon app"
   },
-  "author": "lhyeonho",
-  "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13",
-    "rimraf": "^3.0.2"
+    "nodemon": "^2.0.3"
   }
 }
