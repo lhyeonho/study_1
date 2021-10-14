@@ -131,56 +131,6 @@ app.post('/upload', upload.array('many'), (req, res) => {
     res.send('ok');
 });
 */
-<<<<<<< Updated upstream
-=======
-
-// dotenv
-dotenv.config();
-
-/* Router : app.js가 길어지는 것을 막을 수 있음.
-const indexRouter = require('./routes');
-const userRouter = require('./routes/user');
-
-app.use('/', indexRouter);
-app.use('/user', userRouter);
-
-app.use((req, res, next) => {
-    res.status(404).send('Not Found');
-});
-
-// :id 를 넣으면 req.params.id로 받을 수 있음, 동적으로 변하는 부분을 라우트 매개변수로 만듦.
-req.get('/uiser/:id', function(req, res) {
-    console.log(req.params, req.query);
-});
-
-// 일반 라우터 보다 뒤에 위치해야 함.
-req.get('/user/:id', function(req, res) {
-	console.log('얘만 실행됨');
-});
-
-req.get('/user/like', function(req, res) {
-	console.log('전혀 실행되지 않음');
-});
-
-// 라우터 그룹화
-req.get('/abc', (req, res) => {
-    res.send('GET /abc');
-});
-
-req.post('/abc', (req, res) => {
-    res.send('POST /abc');
-});
-
-// router.route로 묶을수도 있음.
-router.route('/abc')
-    .get((req, res) => {
-        res.send('GET /abc');
-    })
-    .post((req, res) => {
-        res.send('POST /abc');
-    });
-*/
->>>>>>> Stashed changes
 
 app.use((req, res, next) => {
     console.log('모든 요청에 실행하고 싶음.');
