@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
+const session = require('express-session');
 const app = express();
 const cookieParser = require('cookie-parser');
 
@@ -71,6 +72,46 @@ app.use(bodyParser.text());
 app.use('/', express.static(path.join(__dirname, 'public')));
 */
 
+/* express-session
+// app.use(session());
+app.use(session({
+    resave: false,  // 요청 왔을 때 세션에 수정사항이 생기지 않아도 다시 저장할지 여부.
+    saveUninitialized: false,   // 세션에 저장할 내역 없어도 세션 저장할지 여부.
+    secret: 'abcabc',   // 쿠키 암호화
+    cookie: {   // 세션 쿠키 옵션
+        httpOnly: true, // 자바스크립트 공격을 막기위해 항상 설정.
+        secure: false,
+    },
+    name: 'connect.sid',    // name의 기본 값 : connect.sid(변경가능), 서명되어있어서 읽을수 없는 문자열로 바뀜.
+}));
+
+app.get('/', (req, res, next) => {
+    req.session.id = 'hello';   // 이렇게 할 경우 요청을 보낸 사람의 id만 hello가 됨.
+});
+*/
+
+/* multer 멀티파트 데이터 형식.
+
+*/
+// upload.single : 하나의 파일을 업로드 할 때.
+app.post('/upload', upload.single('image'), (req, res) => {
+    console.log(req.file, req.body);
+    res.send('ok');
+});
+
+// upload.none : 파일은 업로드 하지 않을 때.
+app.post('/upload', upload.none(), (req, res) => {
+    console.log(req.body);
+    res.send('ok');
+});
+
+// upload.array : 여러 개의 파일을 업로드 할 때.
+app.post('/upload', upload.array('many'), (req, res) => {
+    console.log(req.files, req.body);
+    res.send('ok');
+});
+
+
 app.use((req, res, next) => {
     console.log('모든 요청에 실행하고 싶음.');
     next();
@@ -82,7 +123,7 @@ app.use((req, res, next) => {
         next();
     }
     */
-}, (req, res, next) {
+}, (req, res, next) => {
     try {
         console.log('abcdefg');
     } catch (error) {
