@@ -91,8 +91,6 @@ app.get('/', (req, res, next) => {
 */
 
 /* multer 멀티파트 데이터 형식.
-
-*/
 // upload.single : 하나의 파일을 업로드 할 때.
 app.post('/upload', upload.single('image'), (req, res) => {
     console.log(req.file, req.body);
@@ -110,7 +108,7 @@ app.post('/upload', upload.array('many'), (req, res) => {
     console.log(req.files, req.body);
     res.send('ok');
 });
-
+*/
 
 app.use((req, res, next) => {
     console.log('모든 요청에 실행하고 싶음.');
