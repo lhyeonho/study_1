@@ -2,10 +2,32 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
-const app = express();
 const cookieParser = require('cookie-parser');
+const nunjucks = require('nunjucks');
+
+dotenv.config();
+const indexRouter = require('./routes');
+const userRouter = require('./routes/user');
+
+const app = express();
 
 app.set('port', process.env.PORT || 3000);
+
+/* nunjucks
+app.set('view engine', 'html');
+
+nunjucks.configure('views', {
+    express: app,
+    watch: true,
+});
+*/
+
+app.set('view engine', 'html');
+
+nunjucks.configure('views', {
+    express: app,
+    watch: true,
+});
 
 /* 미들웨어 안에 미들웨어 넣는 방법_1
 app.use(morgan('dev'));
@@ -109,6 +131,56 @@ app.post('/upload', upload.array('many'), (req, res) => {
     res.send('ok');
 });
 */
+<<<<<<< Updated upstream
+=======
+
+// dotenv
+dotenv.config();
+
+/* Router : app.js가 길어지는 것을 막을 수 있음.
+const indexRouter = require('./routes');
+const userRouter = require('./routes/user');
+
+app.use('/', indexRouter);
+app.use('/user', userRouter);
+
+app.use((req, res, next) => {
+    res.status(404).send('Not Found');
+});
+
+// :id 를 넣으면 req.params.id로 받을 수 있음, 동적으로 변하는 부분을 라우트 매개변수로 만듦.
+req.get('/uiser/:id', function(req, res) {
+    console.log(req.params, req.query);
+});
+
+// 일반 라우터 보다 뒤에 위치해야 함.
+req.get('/user/:id', function(req, res) {
+	console.log('얘만 실행됨');
+});
+
+req.get('/user/like', function(req, res) {
+	console.log('전혀 실행되지 않음');
+});
+
+// 라우터 그룹화
+req.get('/abc', (req, res) => {
+    res.send('GET /abc');
+});
+
+req.post('/abc', (req, res) => {
+    res.send('POST /abc');
+});
+
+// router.route로 묶을수도 있음.
+router.route('/abc')
+    .get((req, res) => {
+        res.send('GET /abc');
+    })
+    .post((req, res) => {
+        res.send('POST /abc');
+    });
+*/
+>>>>>>> Stashed changes
 
 app.use((req, res, next) => {
     console.log('모든 요청에 실행하고 싶음.');
@@ -193,6 +265,8 @@ app.get((req, res, next) => {
     res.status(200).send('200번대 에러');
 });
 
+// 404 : 요청과 일치하는 라우터가 없는 경우에 대비하여 404 라우터 만들기.
+// 없을 경우 단순히 Cannot GET 주소 라는 문자열 표시 됨.)
 app.get((req, res, next) => {
     res.status(404).send('400번대 에러');
 });
