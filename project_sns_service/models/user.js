@@ -39,7 +39,7 @@ module.exports = class User extends Sequelize.Model {
 
   static associate(db) {
     db.User.hasMany(db.Post);
-    db.User.belongsToMany(db.User, {
+    db.User.belongsToMany(db.User, {  // belongsToMany : 다 대 다 관계. 필연적으로 중간 테이블 생김. -> Through
       foreignKey: 'followingId',
       as: 'Followers',
       through: 'Follow',
